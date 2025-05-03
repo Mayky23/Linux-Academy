@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="assets/icon/icono.png" type="image/x-icon">
+    <title>Linux Academy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Linux Academy - Aprende los comandos de Linux de manera interactiva</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Intro Screen -->
+        <div class="intro-screen" id="intro-screen">
+            <h2>Bienvenido a Terminal Academy</h2>
+            <p>Domina Linux paso a paso mientras te enfrentas a emocionantes desafíos: aprende desde los 
+                comandos más básicos hasta los más avanzados, supera cada nivel y consigue una FLAG 
+                secreta que desbloqueará el siguiente reto. <br><br>¡Conviértete en un verdadero experto en 
+                Linux!<br><br> <b>By: Miguel Ángel Roldán de Haro</b></p>
+            <button class="start-btn" id="start-btn">Comenzar</button>
+        </div>
+        
+        <!-- How it works modal -->
+        <div id="instructions-modal" class="modal hide">
+            <h3 class="modal-title">¿Cómo funciona?</h3>
+            <div class="modal-content">
+                <p>Esta aplicación te ayudará a aprender comandos de Linux de forma práctica:</p><br>
+                <ol style="text-align: left">
+                    <li>Cada nivel tiene varios comandos que deberás practicar.</li><br>
+                    <li>Completa todos los comandos de un nivel para desbloquear su FLAG.</li><br>
+                    <li>Usa la FLAG para desbloquear el siguiente nivel.</li><br>
+                    <li>¡Completa los tres niveles para convertirte en un experto de Linux!</li><br>
+                </ol>
+                <p>Puedes usar el comando <strong>help</strong> en cualquier momento para obtener ayuda.</p>
+            </div>
+            <button class="modal-btn" id="close-instructions">Entendido</button>
+        </div>
+
+        <!-- Command List Modal -->
+        <div id="commands-list-modal" class="modal hide">
+            <h3 class="modal-title">Lista de Comandos</h3>
+            <div class="modal-content">
+                <div id="command-list-content"></div>
+            </div>
+            <button class="modal-btn" id="close-commands-list">Cerrar</button>
+        </div>
+        
+        <!-- Main App -->
+        <div id="app-container" class="hide">
+            <div class="level-selector" id="level-selector">
+                <!-- Los botones de nivel se generarán dinámicamente -->
+            </div>
+            
+            <div class="level-progress">
+                <div class="level-info">
+                    <span id="progress-text">Nivel Básico: 0/24 comandos</span>
+                    <button class="command-list-btn" id="show-commands-list">Ver comandos</button>
+                </div>
+                <div class="flags-container" id="flags-container"></div>
+            </div>
+            
+            
+            <div class="command-info">
+                <h3 class="command-title" id="command-title">Comando: ls</h3>
+                <p class="command-description" id="command-description">El comando ls muestra el contenido de un directorio.</p>
+                <p class="task-description" id="task-description">Tarea: Usa el comando ls para listar los archivos en el directorio actual.</p>
+                <div id="hint-container" class="hide">
+                    <p class="hint-text" id="hint-text"></p>
+                </div>
+                <button class="hint-btn" id="hint-btn">Mostrar pista</button>
+                <p class="command-counter" id="command-counter">Comando 1 de 86</p>
+            </div>
+            
+            <div class="terminal-container">
+                <div class="terminal-output" id="terminal-output">Bienvenido a la terminal de Linux.
+                    Escribe los comandos y presiona Enter para ejecutarlos.
+                    Escribe 'help' para ver comandos disponibles en la simulación.
+                </div>
+                <div class="terminal-input-line">
+                    <span class="prompt" id="prompt">usuario@linux:~$</span>
+                    <input type="text" id="terminal-input" autofocus>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <button class="submit-flag-btn" id="submit-flag-btn">Insertar FLAG</button>
+
+                <button id="reset-progress-btn" class="reset-btn">
+
+                    <i class="fas fa-trash-alt"></i> Reiniciar <br>Progreso
+                </button>
+            </div>
+
+            <!-- Reset progress Modal -->
+            <div id="reset-modal" class="hide">
+                <div class="overlay"></div>
+                <div class="flag-input-container">
+                    <h3 style="margin-top: 0; color: var(--accent-color);">Reiniciar Progreso</h3>
+                    <p>¿Estás seguro que deseas borrar todo tu progreso?</p>
+                    <p>Se eliminarán todos los comandos completados, niveles desbloqueados y flags obtenidas.</p>
+                    <div id="reset-message" class="flag-msg hide"></div>
+                    <div class="flag-btns">
+                        <button class="close-btn" id="cancel-reset-btn">Cancelar</button>
+                        <button class="verify-btn" id="confirm-reset-btn">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flag Input Modal -->
+            <div id="flag-modal" class="hide">
+                <div class="overlay"></div>
+                <div class="flag-input-container">
+                    <h3 style="margin-top: 0; color: var(--accent-color);">Insertar FLAG</h3>
+                    <p>Introduce la FLAG que has conseguido para desbloquear el siguiente nivel:</p>
+                    <input type="text" id="flag-input" class="flag-input" placeholder="FLAG_XXXXX">
+                    <div id="flag-message" class="flag-msg hide"></div>
+                    <div class="flag-btns">
+                        <button class="close-btn" id="close-flag-btn">Cancelar</button>
+                        <button class="verify-btn" id="verify-flag-btn">Verificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer>
+        Terminal Academy - Aprende los comandos de Linux de manera interactiva <br><br> By: MARH 
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
